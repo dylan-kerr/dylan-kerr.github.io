@@ -1,0 +1,9 @@
+title: Dylan Kerr
+lang: en_AU
+repository: dylan-kerr/dylan-kerr.github.io
+google_analytics: UA-156204372-1
+
+# Build settings
+plugins:
+    - jekyll-feed
+    - jekyll-seo-tag
