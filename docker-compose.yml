@@ -9,5 +9,14 @@ services:
         ports:
             - "8080:4000"
 
+    shell:
+        image: bretfisher/jekyll
+        volumes:
+            - .:/site
+            - cache:/usr/local/bundle
+        ports:
+            - "8080:4000"
+        entrypoint: "bash"
+
 volumes:
     cache:
