@@ -19,44 +19,119 @@ Let's walk through the process.
 
 Upon opening the repository, I am greeted by a deafening lack of documentation - no README, no CHANGELOG. That would be too easy. Instead we have:
 
-- `.gitignore` It looks suspiciously like I did the initial development for this site in Visual Studio, which makes sense as I only moved to Visual Studio Code in late 2016 or perhaps early 2017.
-- `.bowerrc` Ah, I used Bower - like NPM for frontend packages, from before NPM was like NPM for frontend packages. I should be able to remove Bower completely in this migration.
-- `bower.json` Here we see a convenient list of frontend packages I'm using:
-  - `requirejs` Module loader and bundler, supplanted by Webpack.
-  - `knockout` JavaScript framework, supplanted by React/Vue/a million others.
-  - `jquery` Needs no introduction. I used it for both DOM manipulation and as an XHR client to make API request to the backend.
-  - `lodash` Array utilities gone wild. I used to be a big fan of Lodash but its relevance has somewhat faded as JavaScript's native features have improved.
-  - `domReady` A tiny little RequireJS plugin that waits for the DOMLoaded event before starting the app.
-  - `text` A RequireJS plugin to load non-JavaScript files as text. Why does that require a plugin? Nevermind.
-  - `bootstrap` The ubiquitous CSS framework - this is one of the few parts I might want to keep.
-  - `pagerjs` A Single-Page Application framework/router built for Knockout.
-  - `assert` A port of Node's built-in assert utility; this is primarily a development aide to make assumptions about parameters concrete (no static types around here).
-- `package.json` Another convenient list of dependencies, this time those installed by NPM for the backend and the build/dev process:
-  - `body-parser` Express middleware to (shock) parse the request body from JSON or URL-encoded (i.e. from HTML forms) text to JS objects.
-  - `bower` Of course we use one package manager to install the other one.
-  - `bunyan` Logging library which (by default) exposes the stream of log messages as newline-delimited JSON with a companion command-line tool to pretty-print that stream.
-  - `compression` Express middleware to (shock) compress responses. You shouldn't really need this - either performance isn't a concern and you don't need compression, or performance is a concern and your separate webserver or proxy should be doing the compression.
-  - `express` Web application framework.
-  - `flat` Tiny utility to de-nest a JS object, in this case for compatibility with Heroku's log parser.
-  - `http-auth` Express middleware to implement HTTP Basic authentication.
-  - `kerberos` If I was using HTTP Basic auth, why did I need Kerberos? If I remember correctly, the MongoDB driver would fail to install without it. Fun.
-  - `lodash` Array utilities gone wild, the sequel.
-  - `logfmt` A library provided by Heroku to transform log messages into their supported format.
-  - `mongoose` A popular Object-Document Mapper (ODM) for use with MongoDB.
-  - `node-uuid` Generates Universally-Unique IDentifiers.
-  - `q` I believe one of the first implementations for Promises for JavaScript, supplanted by native Promises.
-  - `sendgrid` Client library for SendGrid's email service (another free Heroku add-on if you stay below the usage limits).
-  - `through2-map` A stream-oriented map utility - applies your function to each object in the stream, then passes it on.
-  - `grunt` A task runner, used here to coordinate the build/dev process.
-  - `grunt-contrib-clean` A Grunt task to delete files from a folder.
-  - `grunt-contrib-jshint` A Grunt task to run the JSHint linter. Apprently this project was before I discovered ESLint.
-  - `grunt-contrib-less` A Grunt task to run the Less compiler and generate plain CSS files.
-  - `grunt-contrib-requirejs` A Grunt task to run the RequireJS bundler.
-- `Gruntfile.js` Configures the build process.
-- `Procfile` This tells Heroku (and now me!) how to start the application.
-- `web.config` Apprently I set this up to also run in IIS using the IISNode handler.
-- `server/` The backend Express application, which I'd like to remove.
-- `client/` The frontend Knockout application, which I'd like to massively simplify.
+`.gitignore`
+: It looks suspiciously like I did the initial development for this site in Visual Studio, which makes sense as I only moved to Visual Studio Code in late 2016 or perhaps early 2017.
+
+`.bowerrc`
+: Ah, I used Bower - like NPM for frontend packages, from before NPM was like NPM for frontend packages. I should be able to remove Bower completely in this migration.
+
+`bower.json`
+: Here we see a convenient list of frontend packages I'm using:
+
+  `requirejs`
+  : Module loader and bundler, supplanted by Webpack.
+
+  `knockout`
+  : JavaScript framework, supplanted by React/Vue/a million others.
+
+  `jquery`
+  : Needs no introduction. I used it for both DOM manipulation and as an XHR client to make API request to the backend.
+
+  `lodash`
+  : Array utilities gone wild. I used to be a big fan of Lodash but its relevance has somewhat faded as JavaScript's native features have improved.
+
+  `domReady`
+  : A tiny little RequireJS plugin that waits for the DOMLoaded event before starting the app.
+
+  `text`
+  : A RequireJS plugin to load non-JavaScript files as text. Why does that require a plugin? Nevermind.
+
+  `bootstrap`
+  : The ubiquitous CSS framework - this is one of the few parts I might want to keep.
+
+  `pagerjs`
+  : A Single-Page Application framework/router built for Knockout.
+
+  `assert`
+  : A port of Node's built-in assert utility; this is primarily a development aide to make assumptions about parameters concrete (no static types around here).
+
+`package.json`
+: Another convenient list of dependencies, this time those installed by NPM for the backend and the build/dev process:
+
+  `body-parser`
+  : Express middleware to (shock) parse the request body from JSON or URL-encoded (i.e. from HTML forms) text to JS objects.
+
+  `bower`
+  : Of course we use one package manager to install the other one.
+
+  `bunyan`
+  : Logging library which (by default) exposes the stream of log messages as newline-delimited JSON with a companion command-line tool to pretty-print that stream.
+
+  `compression`
+  : Express middleware to (shock) compress responses. You shouldn't really need this - either performance isn't a concern and you don't need compression, or performance is a concern and your separate webserver or proxy should be doing the compression.
+
+  `express`
+  : Web application framework.
+
+  `flat`
+  : Tiny utility to de-nest a JS object, in this case for compatibility with Heroku's log parser.
+
+  `http-auth`
+  : Express middleware to implement HTTP Basic authentication.
+
+  `kerberos`
+  : If I was using HTTP Basic auth, why did I need Kerberos? If I remember correctly, the MongoDB driver would fail to install without it. Fun.
+
+  `lodash`
+  : Array utilities gone wild, the sequel.
+
+  `logfmt`
+  : A library provided by Heroku to transform log messages into their supported format.
+
+  `mongoose`
+  : A popular Object-Document Mapper (ODM) for use with MongoDB.
+
+  `node-uuid`
+  : Generates Universally-Unique IDentifiers.
+
+  `q`
+  : I believe one of the first implementations for Promises for JavaScript, supplanted by native Promises.
+
+  `sendgrid`
+  : Client library for SendGrid's email service (another free Heroku add-on if you stay below the usage limits).
+
+  `through2-map`
+  : A stream-oriented map utility - applies your function to each object in the stream, then passes it on.
+
+  `grunt`
+  : A task runner, used here to coordinate the build/dev process.
+
+  `grunt-contrib-clean`
+  : A Grunt task to delete files from a folder.
+
+  `grunt-contrib-jshint`
+  : A Grunt task to run the JSHint linter. Apprently this project was before I discovered ESLint.
+
+  `grunt-contrib-less`
+  : A Grunt task to run the Less compiler and generate plain CSS files.
+
+  `grunt-contrib-requirejs`
+  : A Grunt task to run the RequireJS bundler.
+
+`Gruntfile.js`
+: Configures the build process.
+
+`Procfile`
+: This tells Heroku (and now me!) how to start the application.
+
+`web.config`
+: Apprently I set this up to also run in IIS using the IISNode handler.
+
+`server/`
+: The backend Express application, which I'd like to remove.
+
+`client/`
+: The frontend Knockout application, which I'd like to massively simplify.
 
 With that information, I have a rough plan of attack:
 
