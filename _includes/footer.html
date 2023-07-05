@@ -1,3 +1,6 @@
 <footer>
+    {%- unless page.hide_home_link -%}
+        <a href="{{ "/" | relative_url }}">Home</a>
+    {%- endunless -%}
     <p>Copyright &copy; 2023, Dylan Kerr.</p>
 </footer>
