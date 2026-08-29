@@ -40,17 +40,41 @@ footer {
 .home ul {
     list-style: none;
     padding: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .post {
-    display: flex;
+    display: grid;
+    grid-template-columns: 8rem auto;
     align-items: center;
 }
 
+.post > h3 {
+    margin: 0;
+}
+
 .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.full-line {
+    flex-basis: 100%;
+}
+
+.post-date {
     color: #555555;
-    inline-size: 8rem;
+}
+
+.post-tag {
     flex-shrink: 0;
+    border-radius: 0.5em;
+    background-color: #cccccc;
+    padding-inline: 0.5rem;
+    text-wrap: nowrap;
 }
 
 /* Generated with `rougify style github` to provide syntax highlighting. */

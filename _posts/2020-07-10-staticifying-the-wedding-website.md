@@ -1,5 +1,8 @@
 ---
 title: Static-ifying the Wedding Website
+tags:
+  - Code
+  - Web
 ---
 
 I got married in 2016. It was great.

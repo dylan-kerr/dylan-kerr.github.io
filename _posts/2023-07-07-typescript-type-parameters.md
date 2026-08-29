@@ -1,5 +1,8 @@
 ---
 title: Function Parameter - Type Parameter Analogies in TypeScript
+tags:
+  - Code
+  - JS/TS
 ---
 
 In TypeScript's type language, type parameters for generic types and functions are often introduced as similar to
@@ -72,7 +75,7 @@ true satisfies Example<{ Toggle: true }>;
 
 The named parameters approach can be combined with defaults/optional parameters at two levels: the individual properties
 can be optional, and the "container" parameter can be optional as a whole. The latter is equivalent between the value
-and type languages as it was for positional optional parameters, but the latter is not well supported in the type
+and type languages as it was for positional optional parameters, but the former is not well supported in the type
 language; I'll demonstrate them separately.
 
 ```ts

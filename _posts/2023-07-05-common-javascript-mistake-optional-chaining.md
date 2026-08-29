@@ -1,5 +1,8 @@
 ---
 title: 'Common JavaScript Mistake: Optional Chaining'
+tags:
+  - Code
+  - JS/TS
 ---
 
 Optional chaining is a very convenient JavaScript feature introduced in ES2020. Dr. Axel has you covered if you need an
